@@ -7,13 +7,23 @@ pipeline {
             }
         }
     }
+    stage('Test') {
+        steps {
+            sh './mvnw test'
+        }
+
+        post {
+            always {
+                junit skipPublishingChecks: true, testResults: '**/target/surefire-reports/TEST-*.xml'
+            }
+        }
+    }
     post {
         success {
             jacoco sourcePattern: '**/src/main/java'
 //            checkStyle(pattern: '**/build/reports/checkstyle/*.xml', reportEncoding: 'UTF-8')
 //            spotBugs(pattern: '**/build/reports/spotbugs/*.xml', reportEncoding: 'UTF-8', useRankAsPriority: true)
 //            detekt(pattern: '**/build/reports/detekt/*.xml', reportEncoding: 'UTF-8')
-            junit skipPublishingChecks: true, testResults: '**/build/test-results/test/*.xml'
         }
     }
 }
