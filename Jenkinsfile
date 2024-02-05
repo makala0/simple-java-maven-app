@@ -8,8 +8,12 @@ pipeline {
         }
     }
     post {
-        always {
-            echo 'I will always say Hello again!'
+        success {
+            jacoco(
+                    execPattern: '**/build/jacoco/*.exec',
+                    classPattern: '**/build/classes/java/main',
+                    sourcePattern: '**/src/main'
+            )
         }
     }
 }
