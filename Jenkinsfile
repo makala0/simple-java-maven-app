@@ -8,7 +8,7 @@ pipeline {
         }
     }
     post {
-        success {
+        recordIssues {
             jacoco sourcePattern: '**/src/main/java'
         }
     }
