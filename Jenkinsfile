@@ -24,21 +24,6 @@ node {
             }
         } catch (Exception e) {
             throw e
-        } finally {
-            recordIssues(
-                    enabledForFailure: true,
-                    tools: [
-                            kotlin(reportEncoding: 'UTF-8'),
-                            pmdParser(pattern: '**/build/reports/pmd/*.xml', reportEncoding: 'UTF-8'),
-                            checkStyle(pattern: '**/build/reports/checkstyle/*.xml', reportEncoding: 'UTF-8'),
-                            spotBugs(pattern: '**/build/reports/spotbugs/*.xml', reportEncoding: 'UTF-8', useRankAsPriority: true),
-                            detekt(pattern: '**/build/reports/detekt/*.xml', reportEncoding: 'UTF-8'),
-                            junitParser(pattern: '**/build/test-results/test/*.xml', reportEncoding: 'UTF-8')
-                    ]
-            )
-
-            jacoco sourcePattern: '**/src/main/java, **src/main/kotlin'
-            junit skipPublishingChecks: true, testResults: '**/build/test-results/test/*.xml'
         }
     }
 }
