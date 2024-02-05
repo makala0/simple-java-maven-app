@@ -14,7 +14,7 @@ pipeline {
 
         post {
             always {
-                junit skipPublishingChecks: true, testResults: '**/target/surefire-reports/TEST-*.xml'
+                junit '**/target/surefire-reports/TEST-*.xml'
             }
         }
     }
