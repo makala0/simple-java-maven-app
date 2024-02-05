@@ -1,4 +1,4 @@
-node('docker && linux') {
+node {
     properties([buildDiscarder(logRotator(artifactNumToKeepStr: '10', numToKeepStr: '60'))])
 
     timestamps {
