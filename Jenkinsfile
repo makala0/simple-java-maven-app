@@ -28,7 +28,6 @@ node {
             recordIssues(
                     enabledForFailure: true,
                     tools: [
-                            java(reportEncoding: 'UTF-8'),
                             kotlin(reportEncoding: 'UTF-8'),
                             pmdParser(pattern: '**/build/reports/pmd/*.xml', reportEncoding: 'UTF-8'),
                             checkStyle(pattern: '**/build/reports/checkstyle/*.xml', reportEncoding: 'UTF-8'),
