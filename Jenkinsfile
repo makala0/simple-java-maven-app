@@ -6,18 +6,19 @@ pipeline {
                 sh 'mvn -B -DskipTests clean package'
             }
         }
-    }
-    stage('Test') {
-        steps {
-            sh './mvnw test'
-        }
+        stage('Test') {
+            steps {
+                sh './mvnw test'
+            }
 
-        post {
-            always {
-                junit '**/target/surefire-reports/TEST-*.xml'
+            post {
+                always {
+                    junit '**/target/surefire-reports/TEST-*.xml'
+                }
             }
         }
     }
+
     post {
         success {
             jacoco sourcePattern: '**/src/main/java'
