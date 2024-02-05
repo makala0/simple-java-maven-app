@@ -13,6 +13,7 @@ pipeline {
 //            checkStyle(pattern: '**/build/reports/checkstyle/*.xml', reportEncoding: 'UTF-8')
 //            spotBugs(pattern: '**/build/reports/spotbugs/*.xml', reportEncoding: 'UTF-8', useRankAsPriority: true)
 //            detekt(pattern: '**/build/reports/detekt/*.xml', reportEncoding: 'UTF-8')
+            junit skipPublishingChecks: true, testResults: '**/build/test-results/test/*.xml'
         }
     }
 }
