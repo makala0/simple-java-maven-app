@@ -1,12 +1,22 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
-            steps {
-                sh 'mvn clean install'
+        try {
+            stage('clean') {
+                cleanWs()
             }
-        }
-        stage('Test') {
+
+            stage('checkout') {
+                checkout scm
+            }
+            stage('Build') {
+                steps {
+                    sh 'mvn clean install'
+                }
+            }
+        } catch(Exception e) {
+            throw e
+        } finally {
             recordIssues(
                     enabledForFailure: true,
                     tools: [
