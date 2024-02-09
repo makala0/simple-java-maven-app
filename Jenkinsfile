@@ -3,18 +3,17 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                sh 'mvn clean install'
             }
         }
     }
 
     post {
         success {
-            jacoco sourcePattern: '**/src/main/java'
+            checkStyle(pattern: '**/target/checkstyle/checkstyle-result/*.xml', reportEncoding: 'UTF-8')
 //            checkStyle(pattern: '**/build/reports/checkstyle/*.xml', reportEncoding: 'UTF-8')
 //            spotBugs(pattern: '**/build/reports/spotbugs/*.xml', reportEncoding: 'UTF-8', useRankAsPriority: true)
 //            detekt(pattern: '**/build/reports/detekt/*.xml', reportEncoding: 'UTF-8')
-            junit '**/target/surefire-reports/*.xml'
         }
     }
 }
