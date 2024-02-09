@@ -6,14 +6,13 @@ pipeline {
                 sh 'mvn clean install'
             }
         }
-    }
-
-    post {
-        recordIssues(
-                enabledForFailure: true,
-                tools: [
-                        checkStyle(pattern: '**/target/checkstyle/checkstyle-result/*.xml', reportEncoding: 'UTF-8'),
-                ]
-        )
+        stage('Test') {
+            recordIssues(
+                    enabledForFailure: true,
+                    tools: [
+                            checkStyle(pattern: '**/target/checkstyle/checkstyle-result/*.xml', reportEncoding: 'UTF-8'),
+                    ]
+            )
+        }
     }
 }
